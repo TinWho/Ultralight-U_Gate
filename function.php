@@ -71,15 +71,6 @@ Lock a presentation layout block straight to a singular status integer code:
  * bbPress subforum administration views right under the main permalink.
  */
 
-
-/**
- * ============================================================================
- * ULTRALIGHT U_GATE (PART 1 OF 5 — REVISED) — ADMINISTRATION INTERFACE
- * ============================================================================
- * Injects the customizable control panel textarea layouts into individual 
- * bbPress subforum administration views right under the main permalink.
- */
-
 // Hook administration interfaces cleanly down standard operational pathways
 add_action( 'edit_form_after_title', 'ultralight_inject_shortcode_field_below_permalink' );
 
@@ -515,11 +506,11 @@ if ( ! function_exists( 'ultralight_universal_brevity_gate' ) ) {
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 4B OF 5) — TRANSACTION LOGIC ENGINE
+ * ULTRALIGHT U_GATE (PART 4B OF 5 — REVISED v3) — TRANSACTION LOGIC ENGINE
  * ============================================================================
- * Evaluates live forum context (supporting single or multiple comma-separated 
- * topic/forum IDs), extracts current user counts, and processes alphanumeric 
- * math vectors securely without text character conflicts.
+ * Evaluates live forum context (supporting multi-ID comma text strings), checks
+ * real-time server date expirations (until="date"), extracts user counts,
+ * and processes alphanumeric math vectors securely without text character conflicts.
  */
 
 /**
@@ -557,7 +548,7 @@ if ( ! function_exists( 'ultralight_process_unlocked_meta_vectors' ) ) {
         }
 
         $is_admin = current_user_can( 'manage_options' );
-        if ( $is_admin && ! $contains_math_checks && ! isset( $r['topic'] ) && ! isset( $r['forum'] ) ) {
+        if ( $is_admin && ! $contains_math_checks && ! isset( $r['topic'] ) && ! isset( $r['forum'] ) && ! isset( $r['until'] ) ) {
             return apply_shortcodes( $content ); 
         }
 
@@ -576,14 +567,24 @@ if ( ! function_exists( 'ultralight_process_unlocked_meta_vectors' ) ) {
                 }
                 $k = strtolower( trim( (string) $k ) ); 
                 
+                // 📍 REAL-TIME CALENDAR DATE EXPIRATION LAYER (until="YYYY-MM-DD")
+                if ( $k === 'until' ) {
+                    $expiration_timestamp = strtotime( $val );
+                    $current_server_time  = current_time( 'timestamp' );
+                    
+                    // If the active calendar time has slipped past your cut-off date, collapse the gate
+                    if ( $expiration_timestamp && $current_server_time > $expiration_timestamp ) {
+                        $dyn = false;
+                        break;
+                    }
+                    continue; // Skip standard user profile metrics for timeline data tags
+                }
+
                 // 📍 CONTEXTUAL TOPIC ID CHECK LAYER (Supports Single or Multiple Comma IDs)
                 if ( $k === 'topic' ) {
                     $current_page_topic_id = ( class_exists( 'bbPress' ) && function_exists( 'bbp_get_topic_id' ) ) ? bbp_get_topic_id() : 0;
+                    $allowed_topic_ids     = array_map( 'intval', array_map( 'trim', explode( ',', $val ) ) );
                     
-                    // Explode, trim whitespace, and typecast every array entry to a pure integer
-                    $allowed_topic_ids = array_map( 'intval', array_map( 'trim', explode( ',', $val ) ) );
-                    
-                    // If the active page ID is missing from the list array framework, fail validation
                     if ( ! in_array( $current_page_topic_id, $allowed_topic_ids, true ) ) {
                         $dyn = false;
                         break;
@@ -603,10 +604,8 @@ if ( ! function_exists( 'ultralight_process_unlocked_meta_vectors' ) ) {
                         }
                     }
                     
-                    // Explode, trim whitespace, and typecast every array entry to a pure integer
                     $allowed_forum_ids = array_map( 'intval', array_map( 'trim', explode( ',', $val ) ) );
                     
-                    // If the active forum ID is missing from the list array framework, fail validation
                     if ( ! in_array( $current_page_forum_id, $allowed_forum_ids, true ) ) {
                         $dyn = false;
                         break;
@@ -672,10 +671,6 @@ if ( ! function_exists( 'ultralight_process_unlocked_meta_vectors' ) ) {
                     $passed = ( $act >= $tgt ); 
                 }
                 
-                if ( ! ! empty( $parts ) ) {
-                    unset( $parts );
-                }
-                
                 if ( ! $passed ) { 
                     $dyn = false; 
                     break; 
@@ -714,6 +709,7 @@ if ( ! function_exists( 'ultralight_render_gateway_fallback_ui' ) ) {
         return '<div class="private-notice" style="background:#fdfdfd;border-left:4px solid #ba2121;padding:12px;margin:12px 0;font-size:13px;color:#1d2327;">🔒 Private Content: Profile requirements not met.</div>';
     }
 }
+
 
 /**
  * ============================================================================
