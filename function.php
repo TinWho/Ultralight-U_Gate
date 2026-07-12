@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * PROJECT:            Ultralight U_Gate
+ * PROJECT:            U_Gate-Ultralight
  * DESCRIPTION:        A high-dexterity, zero-bloat Dynamic Content Gate & 
  *                     Telemetry Routing Engine for high-traffic forum networks.
  * FILE LOCATION:      WordPress/bbPress Child Theme functions.php snippet
@@ -17,9 +17,9 @@
 
 
 ============================================================================
-ULTRALIGHT-U_GATE FOR bbPRESS — CORE SPECIFICATION PRODUCTION BUILD (GPLv2+)
+U_Gate-Ultralight FOR bbPRESS — CORE SPECIFICATION PRODUCTION BUILD (GPLv2+)
 ============================================================================
-Ultralight-U_Gate is a high-performance architectural translation layer.
+U_Gate-Ultralight is a high-performance architectural translation layer.
 It bridges your backend database with your front-end presentation layer, 
 translating raw values inside the highly indexed `wp_usermeta` table into 
 instant conditional layout tracks and pinpoint location/time constraints.
@@ -66,7 +66,7 @@ Lock a presentation layout block straight to a singular status integer code:
 */
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 1 OF 5) — ADMINISTRATION INTERFACE
+ * U_Gate-Ultralight (PART 1 OF 5) — ADMINISTRATION INTERFACE
  * ============================================================================
  * Injects the customizable control panel textarea layouts into individual 
  * bbPress subforum administration views right under the main permalink.
@@ -146,7 +146,7 @@ if ( ! function_exists( 'ultralight_inject_shortcode_field_below_permalink' ) ) 
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 2 OF 5 — REVISED) — SAVING ENGINE & GLOBAL OPTIONS
+ * U_Gate-Ultralight (PART 2 OF 5 — REVISED) — SAVING ENGINE & GLOBAL OPTIONS
  * ============================================================================
  * Handles the secure saving pipelines for individual forum configurations
  * and integrates the Global Settings Engine blocks inside the native bbPress menu.
@@ -244,7 +244,7 @@ if ( ! function_exists( 'ultralight_render_global_settings_textarea' ) ) {
 }
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 3 OF 5 — REVISED) — THREE-TIER CACHED INTERCEPTOR
+ * U_Gate-Ultralight (PART 3 OF 5 — REVISED) — THREE-TIER CACHED INTERCEPTOR
  * ============================================================================
  * Intercepts bbPress templates to automatically inject your active rule sets.
  * It searches down 3 levels (Local Meta -> Parent Tree -> Global Option)
@@ -396,7 +396,7 @@ if ( ! function_exists( 'ultralight_flush_all_forum_transients_on_global_save' )
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 4A OF 5) — SHORTCODE GATEWAY ROUTER
+ * U_Gate-Ultralight (PART 4A OF 5) — SHORTCODE GATEWAY ROUTER
  * ============================================================================
  * Establishes the core [u_gate] shortcode interface. Manages recursive safety
  * thresholds and flattens roles, capabilities, and dynamic custom user groups
@@ -507,7 +507,7 @@ if ( ! function_exists( 'ultralight_universal_brevity_gate' ) ) {
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 4B OF 5 — REVISED v3) — TRANSACTION LOGIC ENGINE
+ * U_Gate-Ultralight (PART 4B OF 5 — REVISED v3) — TRANSACTION LOGIC ENGINE
  * ============================================================================
  * Evaluates live forum context (supporting multi-ID comma text strings), checks
  * real-time server date expirations (until="date"), extracts user counts,
@@ -714,7 +714,7 @@ if ( ! function_exists( 'ultralight_render_gateway_fallback_ui' ) ) {
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 4C OF 5 — REVISED) — FRONT-END DIAGNOSTIC CONSOLE
+ * U_Gate-Ultralight (PART 4C OF 5 — REVISED) — FRONT-END DIAGNOSTIC CONSOLE
  * ============================================================================
  * Reads directly from relational user metadata tables and live bbPress counters
  * to print terminal-style audit reports exclusively for diagnostic sessions.
@@ -818,7 +818,7 @@ if ( ! function_exists( 'ultralight_render_user_profile_debug_stats' ) ) {
 
 /**
  * ============================================================================
- * ULTRALIGHT U_GATE (PART 5A OF 5 — REVISED) — SETTINGS RADAR INTERFACE INJECTOR
+ * U_Gate-Ultralight (PART 5A OF 5 — REVISED) — SETTINGS RADAR INTERFACE INJECTOR
  * ============================================================================
  * Registers the Topographical dependency tracking row onto the native bbPress 
  * options layout grid. Processes form field lookup queries safely without 
